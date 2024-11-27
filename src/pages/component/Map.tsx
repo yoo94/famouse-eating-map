@@ -24,6 +24,15 @@ export default function Map() {
 
       // 마커띄우기
       stores?.["DATA"]?.map((store)=>{
+        var imageSrc = store?.bizcnd_code_nm ? `/images/markers/${store?.bizcnd_code_nm}.png` : '/images/markers/default.png',
+        imageSize = new window.kakao.maps.Size(40, 40),  // 마커 이미지의 크기
+        imageOption = {offset: new window.kakao.maps.Point(27, 69)}; // 마커의 좌표의 원시값, 이미지 안에서 좌표를 설정합니다.
+
+        var markerImage = new window.kakao.maps.MarkerImage(
+            imageSrc,
+            imageSize,
+            imageOption
+        )
         // 마커가 표시될 위치입니다
         var markerPosition = new window.kakao.maps.LatLng(
             store?.y_dnts,
@@ -32,7 +41,8 @@ export default function Map() {
 
         // 마커 생성합니다
         var marker = new window.kakao.maps.Marker({
-            position: markerPosition
+            position: markerPosition,
+            image: markerImage
         });
 
         // 마커가 지도 위에 표시되도록 설정합니다
