@@ -9,7 +9,7 @@ export default function Navbar(){
     return(
         <>
           <div className="navbar">
-            <div className="navbar__logo">nextmap</div>
+            <Link className="navbar__logo" href="/">nextmap</Link>
             <div className="navbar__list">
                 <Link className="navbar__list--item" href="/stores">맛집  목록</Link>
                 <Link className="navbar__list--item" href="/stores/new">맛집  등록</Link>
@@ -21,17 +21,17 @@ export default function Navbar(){
             </div>
           </div>
           {/* mobile */}
-          <div className="navbar--mobile">
-            <div className="navbar_list--mobile">
-                <Link className="navbar__list--item--mobile" href="/stores">맛집  목록</Link>
-                <Link className="navbar__list--item--mobile" href="/stores/new">맛집  등록</Link>
-                <Link className="navbar__list--item--mobile" href="/stores/1">맛집  가게</Link>
-                <Link className="navbar__list--item--mobile" href="/users/login">로그인</Link>
+          {isOpen &&
+            <div className="navbar--mobile">
+              <div className="navbar__list--mobile">
+                  <Link className="navbar__list--item--mobile" href="/stores">맛집  목록</Link>
+                  <Link className="navbar__list--item--mobile" href="/stores/new">맛집  등록</Link>
+                  <Link className="navbar__list--item--mobile" href="/stores/1">맛집  가게</Link>
+                  <Link className="navbar__list--item--mobile" href="/users/login">로그인</Link>
+              </div>
             </div>
-            <div role="presentation" className="navbar__button" onClick={()=> setIsOpen((val) => !val)}>
-              {isOpen ? <AiOutlineClose/> : <BiMenu/>}
-            </div>
-          </div>
+          }
+          
         </>
     );
 }
