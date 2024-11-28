@@ -56,3 +56,7 @@
     @apply flex flex-col gap-[16px]
   }
 }
+
+.infowindow {
+  @apply bg-blue-900 text-white block text-center h-6 rounded-sm text-sm px-2 leading-6
+}

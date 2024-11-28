@@ -1,6 +1,6 @@
 /** global kakao */
 import Script from 'next/script';
-import * as stores from '@/data/store_data.json';
+import { Dispatch, SetStateAction } from 'react';
 
 // window 객체에 kakao 프로퍼티 추가 선언(TS)
 declare global {
@@ -11,9 +11,13 @@ declare global {
 const DEFAULT_LAT = 37.497625203;
 const DEFAULT_LNG = 127.03088379;
 
-export default function Map() {
+interface MapProps {
+  setMap: Dispatch<SetStateAction<any>>
+}
+
+export default function Map({ setMap }: MapProps) {
   const loadKakaoMap = () => {
-      //카카오 지도 로드 함수
+    //카카오 지도 로드 함수
     window.kakao.maps.load(() => {
       const mapContainer = document.getElementById('map');
       const mapOption = {
@@ -21,38 +25,12 @@ export default function Map() {
         level: 3,
       };
       const map = new window.kakao.maps.Map(mapContainer, mapOption);
-
-      // 마커띄우기
-      stores?.["DATA"]?.map((store)=>{
-        var imageSrc = store?.bizcnd_code_nm ? `/images/markers/${store?.bizcnd_code_nm}.png` : '/images/markers/default.png',
-        imageSize = new window.kakao.maps.Size(40, 40),  // 마커 이미지의 크기
-        imageOption = {offset: new window.kakao.maps.Point(27, 69)}; // 마커의 좌표의 원시값, 이미지 안에서 좌표를 설정합니다.
-
-        var markerImage = new window.kakao.maps.MarkerImage(
-            imageSrc,
-            imageSize,
-            imageOption
-        )
-        // 마커가 표시될 위치입니다
-        var markerPosition = new window.kakao.maps.LatLng(
-            store?.y_dnts,
-            store?.x_cnts
-        );
-
-        // 마커 생성합니다
-        var marker = new window.kakao.maps.Marker({
-            position: markerPosition,
-            image: markerImage
-        });
-
-        // 마커가 지도 위에 표시되도록 설정합니다
-        marker.setMap(map);
-      })
+      setMap(map);
     });
   };
 
   return (
-      //nextjs Script 태그로 카카오 지도 로드하기
+    //nextjs Script 태그로 카카오 지도 로드하기
     <>
       <Script
         strategy="afterInteractive"
