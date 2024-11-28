@@ -1,14 +1,13 @@
-import * as stores from "@/data/store_data.json"
 import { useState } from "react";
 import Map from "@/pages/component/Map"
 import Markers from "@/pages/component/Markers"
 import StoreBox from "@/pages/component/StoreBox";
 import { StoreType } from "@/interface";
+import axios from "axios";
 
 export default function Home({ stores }: { stores: StoreType[] }) {
   const [map, setMap] = useState(null);
   const [currentStore, setCurrentStore] = useState(null);
-  console.log(currentStore);
   return (
     <>
       <Map setMap={setMap} />
@@ -19,9 +18,9 @@ export default function Home({ stores }: { stores: StoreType[] }) {
 }
 
 export async function getStaticProps() {
-  const stores = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/stores`).then((res) => res.json())
+  const stores = await axios(`${process.env.NEXT_PUBLIC_API_URL}/api/stores`);
   return {
-    props: { stores },
+    props: { stores: stores.data },
     revalidate: 60 * 60
   }
 }
