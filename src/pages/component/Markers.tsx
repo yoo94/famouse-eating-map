@@ -3,7 +3,7 @@ import { StoreType } from "@/interface";
 
 interface MarkerProps {
     map: any;
-    stores: any[];
+    stores: StoreType[];
     setCurrentStore: Dispatch<SetStateAction<any>>;
 }
 
@@ -12,7 +12,7 @@ export default function Markers({ map, stores, setCurrentStore }: MarkerProps) {
         if (map) {
             // 마커 띄우기
             stores?.map((store) => {
-                var imageSrc = store?.bizcnd_code_nm ? `/images/markers/${store?.bizcnd_code_nm}.png` : '/images/markers/default.png',
+                var imageSrc = store?.category ? `/images/markers/${store?.category}.png` : '/images/markers/default.png',
                     imageSize = new window.kakao.maps.Size(40, 40),  // 마커 이미지의 크기
                     imageOption = { offset: new window.kakao.maps.Point(27, 69) }; // 마커의 좌표의 원시값, 이미지 안에서 좌표를 설정합니다.
 
@@ -24,8 +24,8 @@ export default function Markers({ map, stores, setCurrentStore }: MarkerProps) {
 
                 // 마커가 표시될 위치입니다
                 var markerPosition = new window.kakao.maps.LatLng(
-                    store?.y_dnts,
-                    store?.x_cnts
+                    store?.lat,
+                    store?.lng
                 );
 
                 // 마커 생성합니다
@@ -38,7 +38,7 @@ export default function Markers({ map, stores, setCurrentStore }: MarkerProps) {
                 marker.setMap(map);
 
                 // 마커에 커스텀 오버레이를 추가할 때 인포윈도우를 생성합니다
-                var Content = `<div class="infowindow">${store?.upso_nm}</div>`;
+                var Content = `<div class="infowindow">${store?.name}</div>`;
 
                 // 인포윈도우를 생성합니다
                 var customOverlay = new window.kakao.maps.CustomOverlay({
