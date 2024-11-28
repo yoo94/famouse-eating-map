@@ -3,15 +3,15 @@ import { StoreType } from "@/interface";
 
 interface MarkerProps {
     map: any;
-    storeDatas: any[];
+    stores: any[];
     setCurrentStore: Dispatch<SetStateAction<any>>;
 }
 
-export default function Markers({ map, storeDatas, setCurrentStore }: MarkerProps) {
+export default function Markers({ map, stores, setCurrentStore }: MarkerProps) {
     const loadKakaoMarkers = useCallback(() => {
         if (map) {
             // 마커 띄우기
-            storeDatas?.map((store) => {
+            stores?.map((store) => {
                 var imageSrc = store?.bizcnd_code_nm ? `/images/markers/${store?.bizcnd_code_nm}.png` : '/images/markers/default.png',
                     imageSize = new window.kakao.maps.Size(40, 40),  // 마커 이미지의 크기
                     imageOption = { offset: new window.kakao.maps.Point(27, 69) }; // 마커의 좌표의 원시값, 이미지 안에서 좌표를 설정합니다.
@@ -65,7 +65,7 @@ export default function Markers({ map, storeDatas, setCurrentStore }: MarkerProp
                 });
             });
         }
-    }, [map, storeDatas, setCurrentStore]); // map과 storeDatas가 변경될 때마다 콜백을 재생성
+    }, [map, stores, setCurrentStore]); // map과 storeDatas가 변경될 때마다 콜백을 재생성
 
     useEffect(() => {
         loadKakaoMarkers();
