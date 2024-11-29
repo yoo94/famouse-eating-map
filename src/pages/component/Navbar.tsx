@@ -9,31 +9,54 @@ export default function Navbar() {
   return (
     <>
       <div className="navbar">
-        <Link className="navbar__logo" href="/">nextmap</Link>
+        <Link className="navbar__logo" href="/">
+          nextmap
+        </Link>
         <div className="navbar__list">
-          <Link className="navbar__list--item" href="/stores">맛집 목록</Link>
+          <Link href="/stores" className="navbar__list--item">
+            맛집 목록
+          </Link>
           <Link className="navbar__list--item" href="/inifinite">맛집 무한 스크롤</Link>
-          <Link className="navbar__list--item" href="/stores/new">맛집  등록</Link>
-          <Link className="navbar__list--item" href="/stores/1">맛집  가게</Link>
-          <Link className="navbar__list--item" href="/users/login">로그인</Link>
+
+          <Link href="/stores/new" className="navbar__list--item">
+            맛집 등록
+          </Link>
+          <Link href="/users/likes" className="navbar__list--item">
+            찜한 가게
+          </Link>
+          <Link href="/api/auth/signin" className="navbar__list--item">
+            로그인
+          </Link>
         </div>
-        <div role="presentation" className="navbar__button" onClick={() => setIsOpen((val) => !val)}>
+        {/* mobile button */}
+        <div
+          role="presentation"
+          className="navbar__button"
+          onClick={() => setIsOpen((val) => !val)}
+        >
           {isOpen ? <AiOutlineClose /> : <BiMenu />}
         </div>
       </div>
-      {/* mobile */}
-      {isOpen &&
+      {/* mobile navbar */}
+      {isOpen && (
         <div className="navbar--mobile">
           <div className="navbar__list--mobile">
-            <Link className="navbar__list--item--mobile" href="/stores">맛집 목록</Link>
+            <Link href="/stores" className="navbar__list--item--mobile">
+              맛집 목록
+            </Link>
             <Link className="navbar__list--item--mobile" href="/inifinite">맛집 무한 스크롤</Link>
-            <Link className="navbar__list--item--mobile" href="/stores/new">맛집  등록</Link>
-            <Link className="navbar__list--item--mobile" href="/stores/1">맛집  가게</Link>
-            <Link className="navbar__list--item--mobile" href="/users/login">로그인</Link>
+            <Link href="/stores/new" className="navbar__list--item--mobile">
+              맛집 등록
+            </Link>
+            <Link href="/users/likes" className="navbar__list--item--mobile">
+              찜한 가게
+            </Link>
+            <Link href="/api/auth/signin" className="navbar__list--item--mobile">
+              로그인
+            </Link>
           </div>
         </div>
-      }
-
+      )}
     </>
   );
 }
