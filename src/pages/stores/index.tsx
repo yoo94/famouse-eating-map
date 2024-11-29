@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { StoreApiResponse } from "@/interface";
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useInfiniteQuery } from "@tanstack/react-query";
 import Loading from "@/pages/component/Loading";
 import { useRouter } from "next/router";
 import Pagenation from "@/pages/component/Pagenation";
@@ -20,6 +20,7 @@ export default function StoreListPage() {
             return data as StoreApiResponse;
         },
     });
+
     if (isError) {
         return (
             <div className="w-full h-screen mx-auto pt-[10%] text-red-500 text-center font-semibold">
