@@ -6,7 +6,6 @@ import axios from "axios";
 import { StoreType } from "@/interface";
 import Loader from "@/pages/component/Loader";
 import Map from "@/pages/component/Map";
-import Marker from "@/pages/component/Marker";
 
 export default function StoreDetailPage() {
     const [map, setMap] = useState(null);
@@ -71,9 +70,8 @@ export default function StoreDetailPage() {
                     </dl>
                 </div>
             </div>
-            {isSuccess && <div className="overflow-hidden w-full mb-0 max-w-5xl mx-auto">
-                <Map setMap={setMap} lat={store.lat} lng={store.lng} zoom={2} />
-                <Marker map={map} store={store} />
+            {isSuccess && <div className="overflow-hidden w-full mb-20 max-w-5xl mx-auto max-h-[600px]">
+                <Map setMap={setMap} lat={store.lat} lng={store.lng} zoom={1} />
             </div>}
         </>
 
